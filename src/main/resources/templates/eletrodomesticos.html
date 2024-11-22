@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title th:text="#{eletrodomesticos.title}">Eletrodomésticos</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="container">
+    <h1 th:text="#{eletrodomesticos.title}">Eletrodomésticos</h1>
+
+    <div class="language-selector">
+        <a href="?lang=pt_BR" th:text="#{lang.pt}">Portugues</a> |
+        <a href="?lang=en" th:text="#{lang.en}">English</a>
+    </div>
+
+    <!-- Formulário de Pesquisa -->
+    <form action="#" th:action="@{/admin/eletrodomesticos}" method="get" class="search-form">
+        <input type="text" name="nome" th:placeholder="#{eletrodomesticos.search.placeholder}" />
+        <button type="submit" class="btn" th:text="#{eletrodomesticos.search.button}">Buscar</button>
+    </form>
+    <br>
+
+    <!-- Formulário para Criar Novo Eletrodoméstico -->
+    <h2 th:text="#{eletrodomesticos.create.title}">Criar Novo Eletrodoméstico</h2>
+    <form action="#" th:action="@{/admin/eletrodomesticos}" method="post" class="create-form">
+        <input type="text" id="nomeEletrodomestico" name="nomeEletrodomestico"
+               th:placeholder="#{eletrodomesticos.name.placeholder}" required />
+        <input type="number" step="0.1" id="potenciaEletrodomestico" name="potenciaEletrodomestico"
+               th:placeholder="#{eletrodomesticos.power.placeholder}" required />
+        <input type="text" id="tipoEletrodomestico" name="tipoEletrodomestico"
+               th:placeholder="#{eletrodomesticos.type.placeholder}" required />
+        <input type="date" id="dataInstalacaoEletrodomestico"
+               name="dataInstalacaoEletrodomestico"
+               th:placeholder="#{eletrodomesticos.date.placeholder}"
+               required />
+        <input type="number" id="comodo" name="comodo"
+               th:placeholder="#{eletrodomesticos.name.comodo}"
+               required />
+        <button type="submit" class="btn" th:text="#{eletrodomesticos.create.button}">Criar Eletrodoméstico</button>
+    </form>
+
+    <!-- Lista de Eletrodomésticos -->
+    <table>
+        <thead>
+        <tr>
+            <th th:text="#{eletrodomesticos.table.id}">ID</th>
+            <th th:text="#{eletrodomesticos.table.name}">Nome</th>
+            <th th:text="#{eletrodomesticos.table.power}">Potência (W)</th>
+            <th th:text="#{eletrodomesticos.table.type}">Tipo</th>
+            <th th:text="#{eletrodomesticos.table.date}">Data Instalação</th>
+            <th th:text="#{eletrodomesticos.table.comodo}">Cômodo</th>
+            <th th:text="#{eletrodomesticos.table.actions}">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="eletrodomestico : ${eletrodomesticos}">
+            <td th:text="${eletrodomestico.idEletrodomestico}"></td>
+            <td th:text="${eletrodomestico.nomeEletrodomestico}"></td>
+            <td th:text="${eletrodomestico.potenciaEletrodomestico}"></td>
+            <td th:text="${eletrodomestico.tipoEletrodomestico}"></td>
+            <td th:text="${#temporals.format(eletrodomestico.dataInstalacaoEletrodomestico, 'dd/MM/yyyy')}"></td>
+            <td th:text="${eletrodomestico.comodo.nomeComodo + ' - ' +
+                         eletrodomestico.comodo.residencia.nomeResidencia}"></td>
+            <td>
+                <form th:action="@{/admin/eletrodomesticos/{id}/delete(id=${eletrodomestico.idEletrodomestico})}"
+                      method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-danger"
+                            th:text="#{eletrodomesticos.delete}">Deletar</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+
+    <a href="#" th:href="@{/dashboard}" class="button" th:text="#{eletrodomesticos.back}">Voltar para o Dashboard</a>
+</div>
+</body>
+</html>

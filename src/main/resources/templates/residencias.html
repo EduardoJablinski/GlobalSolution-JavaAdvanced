@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title th:text="#{residencias.title}">Residências</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="container">
+    <h1 th:text="#{residencias.title}">Residências</h1>
+
+    <div class="language-selector">
+        <a href="?lang=pt_BR" th:text="#{lang.pt}">Portugues</a> |
+        <a href="?lang=en" th:text="#{lang.en}">English</a>
+    </div>
+
+    <!-- Formulário de Pesquisa -->
+    <form action="#" th:action="@{/admin/residencias}" method="get" class="search-form">
+        <input type="text" name="nome" th:placeholder="#{residencias.search.placeholder}" />
+        <button type="submit" class="btn" th:text="#{residencias.search.button}">Buscar</button>
+    </form>
+    <br>
+
+    <!-- Formulário para Criar Nova Residência -->
+    <h2 th:text="#{residencias.create.title}">Criar Nova Residência</h2>
+    <form action="#" th:action="@{/admin/residencias}" method="post" class="create-form">
+        <input type="text" id="nomeResidencia" name="nomeResidencia" th:placeholder="#{residencias.name.placeholder}" required />
+        <input type="text" id="enderecoResidencia" name="enderecoResidencia" th:placeholder="#{residencias.address.placeholder}" required />
+        <input type="number" id="numeroResidencia" name="numeroResidencia" th:placeholder="#{residencias.number.placeholder}" required />
+        <input type="text" id="cidadeResidencia" name="cidadeResidencia" th:placeholder="#{residencias.city.placeholder}" required />
+        <input type="text" id="estadoResidencia" name="estadoResidencia" th:placeholder="#{residencias.state.placeholder}" required />
+        <input type="text" id="cepResidencia" name="cepResidencia" th:placeholder="#{residencias.cep.placeholder}" required />
+        <button type="submit" class="btn" th:text="#{residencias.create.button}">Criar Residência</button>
+    </form>
+
+    <!-- Lista de Residências -->
+    <table>
+        <thead>
+        <tr>
+            <th th:text="#{residencias.table.id}">ID</th>
+            <th th:text="#{residencias.table.name}">Nome</th>
+            <th th:text="#{residencias.table.address}">Endereço</th>
+            <th th:text="#{residencias.table.number}">Número</th>
+            <th th:text="#{residencias.table.city}">Cidade</th>
+            <th th:text="#{residencias.table.state}">Estado</th>
+            <th th:text="#{residencias.table.cep}">CEP</th>
+            <th th:text="#{residencias.table.actions}">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="residencia : ${residencias}">
+            <td th:text="${residencia.idResidencia}"></td>
+            <td th:text="${residencia.nomeResidencia}"></td>
+            <td th:text="${residencia.enderecoResidencia}"></td>
+            <td th:text="${residencia.numeroResidencia}"></td>
+            <td th:text="${residencia.cidadeResidencia}"></td>
+            <td th:text="${residencia.estadoResidencia}"></td>
+            <td th:text="${residencia.cepResidencia}"></td>
+            <td>
+                <form th:action="@{/admin/residencias/{id}/delete(id=${residencia.idResidencia})}"
+                      method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-danger"
+                            th:text="#{residencias.delete}">Deletar</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+
+    <a href="#" th:href="@{/dashboard}" class="button" th:text="#{residencias.back}">Voltar para o Dashboard</a>
+</div>
+</body>
+</html>

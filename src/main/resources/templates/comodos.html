@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title th:text="#{comodos.title}">Cômodos</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="container">
+    <h1 th:text="#{comodos.title}">Cômodos</h1>
+
+    <div class="language-selector">
+        <a href="?lang=pt_BR" th:text="#{lang.pt}">Portugues</a> |
+        <a href="?lang=en" th:text="#{lang.en}">English</a>
+    </div>
+
+    <!-- Formulário de Pesquisa -->
+    <form action="#" th:action="@{/admin/comodos}" method="get" class="search-form">
+        <input type="text" name="nome" th:placeholder="#{comodos.search.placeholder}" />
+        <button type="submit" class="btn" th:text="#{comodos.search.button}">Buscar</button>
+    </form>
+    <br>
+
+    <!-- Formulário para Criar Novo Cômodo -->
+    <h2 th:text="#{comodos.create.title}">Criar Novo Cômodo</h2>
+    <form action="#" th:action="@{/admin/comodos}" method="post" class="create-form">
+        <input type="text" id="nomeComodo" name="nomeComodo" th:placeholder="#{comodos.name.placeholder}" required />
+        <input type="number" id="residencia" name="residencia"
+               th:placeholder="#{comodos.residencia.id.placeholder}"
+               required />
+        <button type="submit" class="btn" th:text="#{comodos.create.button}">Criar Cômodo</button>
+    </form>
+
+    <!-- Lista de Cômodos -->
+    <table>
+        <thead>
+        <tr>
+            <th th:text="#{comodos.table.id}">ID</th>
+            <th th:text="#{comodos.table.name}">Nome</th>
+            <th th:text="#{comodos.table.residencia}">Residência</th>
+            <th th:text="#{comodos.table.actions}">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="comodo : ${comodos}">
+            <td th:text="${comodo.idComodo}"></td>
+            <td th:text="${comodo.nomeComodo}"></td>
+            <td th:text="${comodo.residencia.nomeResidencia}"></td>
+            <td>
+                <form th:action="@{/admin/comodos/{id}/delete(id=${comodo.idComodo})}"
+                      method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-danger"
+                            th:text="#{comodos.delete}">Deletar</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+
+    <a href="#" th:href="@{/dashboard}" class="button" th:text="#{comodos.back}">Voltar para o Dashboard</a>
+</div>
+</body>
+</html>

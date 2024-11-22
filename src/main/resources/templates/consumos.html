@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title th:text="#{consumo.title}">Consumo de Energia</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="container">
+    <h1 th:text="#{consumo.title}">Consumo de Energia</h1>
+
+    <div class="language-selector">
+        <a href="?lang=pt_BR" th:text="#{lang.pt}">Portugues</a> |
+        <a href="?lang=en" th:text="#{lang.en}">English</a>
+    </div>
+
+    <!-- Formulário de Pesquisa -->
+    <form action="#" th:action="@{/admin/consumos}" method="get" class="search-form">
+        <input type="text" name="nome" th:placeholder="#{consumos.search.placeholder}" />
+        <button type="submit" class="btn" th:text="#{consumos.search.button}">Buscar</button>
+    </form>
+    <br>
+
+
+    <!-- Formulário para Registrar Novo Consumo -->
+    <h2 th:text="#{consumo.create.title}">Registrar Novo Consumo</h2>
+    <form action="#" th:action="@{/admin/consumos}" method="post" class="create-form">
+
+        <input type="date" name="dataConsumo" th:placeholder="#{consumo.date.placeholder}" required/>
+
+        <input type="number" step="0.01" id="quantidadeConsumo" name="quantidadeConsumo"
+               th:placeholder="#{consumo.quantidade.placeholder}"
+               required />
+
+        <input type="number" step="0.01" id="gastosConsumo" name="gastosConsumo"
+               th:placeholder="#{consumo.gastos.placeholder}"
+               required />
+
+        <input type="number" name="eletrodomestico" th:placeholder="#{consumo.select.eletrodomestico}" required/>
+
+
+        <button type="submit" class="btn" th:text="#{consumo.create.button}">Registrar Consumo</button>
+    </form>
+
+    <!-- Lista de Consumos -->
+    <table>
+        <thead>
+        <tr>
+            <th th:text="#{consumo.table.id}">ID</th>
+            <th th:text="#{consumo.table.eletrodomestico}">Eletrodoméstico</th>
+            <th th:text="#{consumo.table.data}">Data e Hora</th>
+            <th th:text="#{consumo.table.quantidade}">Consumo (kWh)</th>
+            <th th:text="#{consumo.table.gastos}">Gastos (R$)</th>
+            <th th:text="#{consumo.table.actions}">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="consumo : ${consumos}">
+            <td th:text="${consumo.idConsumo}"></td>
+            <td th:text="${consumo.eletrodomestico.nomeEletrodomestico}"></td>
+            <td th:text="${#temporals.format(consumo.dataConsumo, 'dd/MM/yyyy')}"></td>
+            <td th:text="${#numbers.formatDecimal(consumo.quantidadeConsumo, 1, 2)}"></td>
+            <td th:text="${#numbers.formatDecimal(consumo.gastosConsumo, 1, 2)}"></td>
+            <td>
+                <form th:action="@{/admin/consumos/{id}/delete(id=${consumo.idConsumo})}"
+                      method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-danger"
+                            th:text="#{consumo.delete}">Deletar</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+
+    <a href="#" th:href="@{/dashboard}" class="button" th:text="#{consumo.back}">Voltar para o Dashboard</a>
+</div>
+</body>
+</html>

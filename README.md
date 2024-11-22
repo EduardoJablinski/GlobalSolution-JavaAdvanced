@@ -18,12 +18,14 @@ A EcoHome é uma aplicação Web MVC desenvolvida com o Spring Framework que sim
 
 Rodar a classe EcohomeApplication.java na IDE para inicializar o projeto.
 Acessar a URL http://localhost:8081/req/login para primeiro acesso à interface e funcionalidades do projeto.
+Também é possível acessar a aplicação pelo link do Deploy informado.
 
 ### **Link do Deploy:**
-
+ecohomeglobalsolution.azurewebsites.net
 
 ### **Link do Vídeo Demonstrativo:**
 
 ### **Link do Vídeo Pitch:**
 
 ### **Diagrama de Classes:**
+![Diagrama de Classes](https://github.com/user-attachments/assets/8bc0f91d-2730-4e5c-8b07-b7c2d345c9fa)

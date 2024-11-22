@@ -23,9 +23,11 @@ Também é possível acessar a aplicação pelo link do Deploy informado.
 ### **Link do Deploy:**
 ecohomeglobalsolution.azurewebsites.net
 
-### **Link do Vídeo Demonstrativo:**
-
 ### **Link do Vídeo Pitch:**
+https://drive.google.com/file/d/1Fgb28iKRaKz8lgr_IklI-wFgVYHgTYpl/view?usp=sharing
+
+### **Link do Vídeo Demonstrativo:**
+https://drive.google.com/file/d/1qDBgfDHEXBBsIkMoxVCvVScf4wpt2pC3/view?usp=sharing
 
 ### **Diagrama de Classes:**
 ![Diagrama de Classes](https://github.com/user-attachments/assets/8bc0f91d-2730-4e5c-8b07-b7c2d345c9fa)
